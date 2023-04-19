@@ -23,7 +23,7 @@ SELECT * FROM shop
 ORDER BY price DESC;
 
 --What is the average price of items in the merch category?
-SELECT ROUND(AVG(price), 2) "avg merch item price"
+SELECT ROUND(AVG(price), 2) "avg merch price"
 FROM shop
 WHERE category = "merch";
 
