@@ -1,0 +1,33 @@
+--Create a skate shop database.
+
+CREATE TABLE shop (id INTEGER PRIMARY KEY, name TEXT, category TEXT, price INTEGER, quantity INTEGER);
+
+INSERT INTO shop VALUES (1, "roller skates", "roller skates", 149.99, 10);
+INSERT INTO shop VALUES (2, "protective set kit", "skate gear", 39.99, 15);
+INSERT INTO shop VALUES (3, "helmet", "skate gear", 79.99, 8);
+INSERT INTO shop VALUES (4, "outdoor wheels", "skate gear", 35.95, 8);
+INSERT INTO shop VALUES (5, "hybrid wheels", "skate gear", 38.95, 9);
+INSERT INTO shop VALUES (6, "indoor wheels", "skate gear", 35.95, 7);
+INSERT INTO shop VALUES (7, "skate leashes", "skate gear", 14.99, 12 );
+INSERT INTO shop VALUES (8, "laces", "skate gear", 8.99, 10);
+INSERT INTO shop VALUES (9, "cruise cap", "merch", 19.99, 7);
+INSERT INTO shop VALUES (10, "toe stops", "skate gear", 24.99, 11);
+INSERT INTO shop VALUES (11, "toe caps", "skate gear", 19.99, 11);
+INSERT INTO shop VALUES (12, "tote bag", "merch", 14.99, 5);
+INSERT INTO shop VALUES (13, "heart sunglasses", "merch", 9.99, 10);
+INSERT INTO shop VALUES (14, "raglan shirt", "merch", 29.99, 7);
+INSERT INTO shop VALUES (15, "skater socks", "merch", 9.99, 13);
+
+--Display the database ordered by price.
+SELECT * FROM shop 
+ORDER BY price DESC;
+
+--What is the average price of items in the merch category?
+SELECT ROUND(AVG(price), 2) "avg merch item price"
+FROM shop
+WHERE category = "merch";
+
+--Which 3 items are least stocked?
+SELECT * FROM shop
+ORDER BY quantity
+LIMIT 3;
