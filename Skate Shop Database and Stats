@@ -18,16 +18,26 @@ INSERT INTO shop VALUES (13, "heart sunglasses", "merch", 9.99, 10);
 INSERT INTO shop VALUES (14, "raglan shirt", "merch", 29.99, 7);
 INSERT INTO shop VALUES (15, "skater socks", "merch", 9.99, 13);
 
---Display the database ordered by price.
+--Display the database ordered by price from higest to lowest.
 SELECT * FROM shop 
 ORDER BY price DESC;
 
 --What is the average price of items in the merch category?
-SELECT ROUND(AVG(price), 2) "avg merch price"
+SELECT ROUND(AVG(price), 2)
 FROM shop
 WHERE category = "merch";
 
 --Which 3 items are least stocked?
-SELECT * FROM shop
+SELECT name, quantity 
+FROM shop
 ORDER BY quantity
 LIMIT 3;
+
+--How many items are in each category?
+SELECT category, COUNT(category) 
+FROM shop
+GROUP BY category;
+
+--What is the total amount of items in stock?
+SELECT SUM(quantity)  
+FROM shop;
