@@ -73,7 +73,7 @@ FROM marvels
 GROUP BY 1
 ORDER BY 2 DESC;
 
---What is the average popularity of Marvel characters from each hometown, with average popularity being above 50?
+--What is the average popularity of Marvel characters from each hometown, with average popularity being above 30?
 
 SELECT hometown, ROUND(AVG(popularity)) AS avg_popularity
 FROM marvels
