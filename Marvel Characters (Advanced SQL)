@@ -42,7 +42,7 @@ INSERT INTO marvels VALUES(26, "Professor X", 58, "Good", "Male", 1.83, 86, "EUA
 
 --What is the average height of Marvel characters?
 
-SELECT ROUND(AVG(height_m), 2)
+SELECT ROUND(AVG(height_m), 2) 
 AS avg_height_m
 FROM marvels;
 
@@ -68,14 +68,16 @@ ORDER BY fighting_SKills_rating;
 
 --What is the average popularity of Marvel characters from each hometown?
 
-SELECT hometown, ROUND(AVG(popularity)) AS avg_popularity
+SELECT hometown, ROUND(AVG(popularity)) 
+AS avg_popularity
 FROM marvels
 GROUP BY 1
 ORDER BY 2 DESC;
 
 --What is the average popularity of Marvel characters from each hometown, with average popularity being above 30?
 
-SELECT hometown, ROUND(AVG(popularity)) AS avg_popularity
+SELECT hometown, ROUND(AVG(popularity)) 
+AS avg_popularity
 FROM marvels
 GROUP BY 1
 HAVING avg_popularity > 30
