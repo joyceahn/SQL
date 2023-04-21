@@ -1,0 +1,105 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE disney_stars (id INTEGER PRIMARY KEY, 
+    firstname TEXT,
+    lastname TEXT,
+    number_disneyprojects INTEGER,
+    latest_disneyproject TEXT,
+    disney_debut TEXT);
+CREATE TABLE disney_projects (id INTEGER PRIMARY KEY, 
+    title TEXT,
+    release_date TEXT,
+    media TEXT,
+    genre TEXT,
+    star_id INTEGER);
+CREATE TABLE disney_hometowns (id INTEGER PRIMARY KEY,
+    name TEXT,
+    region TEXT,
+    country TEXT,
+    star_id INTEGER);
+CREATE TABLE disney_costars (id INTEGER PRIMARY KEY, 
+    costar_1_id INTEGER,
+    costar_2_id INTEGER);
+    
+INSERT INTO disney_stars (firstname, lastname, number_disneyprojects, latest_disneyproject, 'disney_debut') VALUES ('Cole', 'Sprouse', '9', 'So Random!', '2005');
+INSERT INTO disney_stars (firstname, lastname, number_disneyprojects, latest_disneyproject, 'disney_debut') VALUES ('Dylan', 'Sprouse', '9', 'So Random!', '2005');
+INSERT INTO disney_stars (firstname, lastname, number_disneyprojects, latest_disneyproject, 'disney_debut') VALUES ('Selena', 'Gomez', '12', 'The Wizards Return: Alex vs. Alex', '2006');
+INSERT INTO disney_stars (firstname, lastname, number_disneyprojects, latest_disneyproject, 'disney_debut') VALUES ('Demi', 'Lovato', '8', 'Sonny with a Chance', '2007'); 
+INSERT INTO disney_stars (firstname, lastname, number_disneyprojects, latest_disneyproject, 'disney_debut') VALUES ('Miley', 'Cyrus', '8', 'Hannah Montana', '2006');
+
+INSERT INTO disney_projects (title, release_date, media, genre, star_id) VALUES ('Hannah Montana', '2006', 'TV show', 'sitcom', '5');
+INSERT INTO disney_projects (title, release_date, media, genre, star_id) VALUES ('Sonny with a Chance', '2009', 'TV show', 'sitcom', '4');
+INSERT INTO disney_projects (title, release_date, media, genre, star_id) VALUES ('The Wizards Return: Alex vs. Alex', '2013', 'TV special', 'fantasy', '3');
+INSERT INTO disney_projects (title, release_date, media, genre, star_id) VALUES ('So Random!', '2011', 'TV show', 'sketch comedy', '1');
+INSERT INTO disney_projects (title, release_date, media, genre, star_id) VALUES ('So Random!', '2011', 'TV show', 'sketch comedy', '2');
+INSERT INTO disney_projects (title, release_date, media, genre, star_id) VALUES ('Princess Protection Program', '2009', 'movie', 'comedy/drama', '3');
+INSERT INTO disney_projects (title, release_date, media, genre, star_id) VALUES ('Princess Protection Program', '2009', 'movie', 'comedy/drama', '4');
+
+INSERT INTO disney_hometowns (name, region, country, star_id) VALUES ('Arezzo', 'Tuscany', 'Italy', '1');
+INSERT INTO disney_hometowns (name, region, country, star_id) VALUES ('Arezzo', 'Tuscany', 'Italy', '2');
+INSERT INTO disney_hometowns (name, region, country, star_id) VALUES ('Grand Prairie', 'Texas', 'USA', '3');
+INSERT INTO disney_hometowns (name, region, country, star_id) VALUES ('Albuquerque', 'New Mexico', 'USA', '4');
+INSERT INTO disney_hometowns (name, region, country, star_id) VALUES ('Franklin', 'Tennessee', 'USA', '5');
+
+INSERT INTO disney_costars (costar_1_id, costar_2_id) VALUES (1, 2);
+INSERT INTO disney_costars (costar_1_id, costar_2_id) VALUES (3, 4);
+
+--Return the names of Disney stars and the names of their costars.
+
+SELECT 
+    a.firstname, a.lastname, 
+    b.firstname, b.lastname 
+FROM disney_costars
+    JOIN disney_stars a
+    ON a.id = disney_costars.costar_1_id
+    JOIN disney_stars b
+    ON b.id = disney_costars.costar_2_id;
+    
+--Which projects have Selena Gomez starred in?
+
+SELECT 
+    disney_stars.firstname, 
+    disney_stars.lastname, 
+    disney_projects.title 
+FROM disney_stars 
+    JOIN disney_projects
+    ON disney_stars.id = disney_projects.star_id 
+    WHERE disney_stars.firstname = 'Selena';
+    
+--Return the names of Disney stars born in the USA and their hometowns.
+
+SELECT 
+    disney_stars.firstname, 
+    disney_stars.lastname, 
+    disney_hometowns.name, 
+    disney_hometowns.region 
+FROM disney_stars
+    JOIN disney_hometowns
+    ON disney_stars.id = disney_hometowns.star_id
+    WHERE country = 'USA';
+    
+--Return the titles of Disney projects and the names of stars who make an appearance in them.
+
+SELECT 
+    disney_projects.title, 
+    disney_stars.firstname, 
+    disney_stars.lastname
+FROM disney_projects 
+    JOIN disney_stars
+    ON disney_projects.star_id = disney_stars.id;
+
+--Return the average number of projects that Disney stars make an appearance in throughout their Disney careers.
+
+SELECT ROUND(AVG(number_disneyprojects)) AS avg_number_disneyprojects
+FROM disney_stars;
+
+--Return the genre of the latest project each Disney star appeared in.
+
+SELECT 
+    disney_stars.firstname,
+    disney_stars.lastname,
+    disney_stars.latest_disneyproject,
+    disney_projects.genre
+FROM disney_stars
+    JOIN disney_projects
+    ON disney_stars.id = disney_projects.star_id;
