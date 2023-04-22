@@ -44,7 +44,7 @@ INSERT INTO disney_hometowns (name, region, country, star_id) VALUES ('Franklin'
 INSERT INTO disney_costars (costar_1_id, costar_2_id) VALUES (1, 2);
 INSERT INTO disney_costars (costar_1_id, costar_2_id) VALUES (3, 4);
 
---Return the names of Disney stars and the names of their costars.
+--1. Return the names of Disney stars and the names of their costars.
 
 SELECT 
     a.firstname, a.lastname, 
@@ -55,7 +55,7 @@ FROM disney_costars
     JOIN disney_stars b
     ON b.id = disney_costars.costar_2_id;
     
---Which projects have Selena Gomez starred in?
+--2. Which projects have Selena Gomez starred in?
 
 SELECT 
     disney_stars.firstname, 
@@ -66,7 +66,7 @@ FROM disney_stars
     ON disney_stars.id = disney_projects.star_id 
     WHERE disney_stars.firstname = 'Selena';
     
---Return the names of Disney stars born in the USA and their hometowns.
+--3. Return the names of Disney stars born in the USA and their hometowns.
 
 SELECT 
     disney_stars.firstname, 
@@ -78,7 +78,7 @@ FROM disney_stars
     ON disney_stars.id = disney_hometowns.star_id
     WHERE country = 'USA';
     
---Return the titles of Disney projects and the names of stars who make an appearance in them.
+--4. Return the titles of Disney projects and the names of stars who make an appearance in them.
 
 SELECT 
     disney_projects.title, 
@@ -88,12 +88,12 @@ FROM disney_projects
     JOIN disney_stars
     ON disney_projects.star_id = disney_stars.id;
 
---Return the average number of projects that Disney stars make an appearance in throughout their Disney careers.
+--5. Return the average number of projects that Disney stars make an appearance in throughout their Disney careers.
 
 SELECT ROUND(AVG(number_disneyprojects)) AS avg_number_disneyprojects
 FROM disney_stars;
 
---Return the genre of the latest project each Disney star appeared in.
+--6. Return the genre of the latest project each Disney star appeared in.
 
 SELECT 
     disney_stars.firstname,
