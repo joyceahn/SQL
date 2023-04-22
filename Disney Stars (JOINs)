@@ -1,4 +1,4 @@
-/* Create table about the people and what they do here */
+/* Create table with small set of “famous people”, then make more tables about things they do and join those to create nice human readable lists */
 
 CREATE TABLE disney_stars (id INTEGER PRIMARY KEY, 
     firstname TEXT,
