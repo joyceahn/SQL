@@ -40,13 +40,13 @@ INSERT INTO marvels VALUES(24, "Venon", 78, "Neutral", "Male", 1.90, 118, "EUA",
 INSERT INTO marvels VALUES(25, "Juggernaut", 76, "Neutral", "Male", 2.87, 862, "EUA", 2, 7, 2, 7, 1, 4);
 INSERT INTO marvels VALUES(26, "Professor X", 58, "Good", "Male", 1.83, 86, "EUA", 5, 2, 2, 2, 5, 3);
 
---What is the average height of Marvel characters?
+--1. What is the average height of Marvel characters?
 
 SELECT ROUND(AVG(height_m), 2) 
 AS avg_height_m
 FROM marvels;
 
---Return all characters with intelligence, strength, and speed greater than or equal to 6.
+--2. Return all characters with intelligence, strength, and speed greater than or equal to 6.
 
 SELECT name, intelligence, strength, speed
 FROM marvels
@@ -54,7 +54,7 @@ WHERE intelligence >= 6
     AND strength >= 6
     AND speed >= 6;
     
---Use a CASE statement to change the rating system for fighting skills.
+--3. Use a CASE statement to change the rating system for fighting skills.
 
 SELECT name,
     CASE
@@ -66,7 +66,7 @@ SELECT name,
 FROM marvels
 ORDER BY fighting_SKills_rating;
 
---What is the average popularity of Marvel characters from each hometown?
+--4. What is the average popularity of Marvel characters from each hometown?
 
 SELECT hometown, ROUND(AVG(popularity)) 
 AS avg_popularity
@@ -74,7 +74,7 @@ FROM marvels
 GROUP BY 1
 ORDER BY 2 DESC;
 
---What is the average popularity of Marvel characters from each hometown, with average popularity being above 30?
+--5. What is the average popularity of Marvel characters from each hometown, with average popularity being above 30?
 
 SELECT hometown, ROUND(AVG(popularity)) 
 AS avg_popularity
