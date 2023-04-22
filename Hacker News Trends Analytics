@@ -1,12 +1,14 @@
 --In this SQL code, I'm querying a database that's holding Hacker News data to answer questions about the data. 
 
 --1. Return the top 5 stories with the highest scores. 
+
 SELECT title, score
 FROM hacker_news
 ORDER BY 2 DESC
 LIMIT 5;
 
 --2. Is a small percentage of Hacker News submitters taking the majority of the points?
+
 SELECT SUM(score)
 FROM hacker_news;
 
@@ -19,6 +21,7 @@ ORDER BY 2 DESC;
 SELECT (517 + 309 + 304 + 282) / 6366.0;
 
 --3. How many times has each rickrolling offender posted the misleading link?
+
 SELECT user, COUNT(*)
 FROM hacker_news
 WHERE url LIKE "%watch?v=dQw4w9WgXcQ%"
@@ -26,6 +29,7 @@ GROUP BY 1
 ORDER BY 2 DESC;
 
 --4. Categorize each story based on their source. Return the number of stories from each source.
+
 SELECT
   CASE
     WHEN url LIKE '%github%' THEN 'GitHub'
@@ -38,6 +42,7 @@ FROM hacker_news
 GROUP BY 1;
 
 --5. What are the best hours to post a story on Hacker News?
+
 SELECT strftime('%H', timestamp) AS 'Hour',
   ROUND(AVG(score), 2) AS 'Average Score',
   COUNT(*) AS 'Number of Stories'
