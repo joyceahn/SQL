@@ -90,6 +90,7 @@ SELECT Product,
  GROUP BY 1;
 
 --11. What was the average amount spent per account in February?
+
 SELECT ROUND(SUM(quantity * price) / COUNT(customers.acctnum) ) AS avg_spent_per_account
   FROM BIT_DB.FebSales
        LEFT JOIN
