@@ -1,0 +1,99 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then, I created a table to insert Spotify data into.
+# Finally, I performed analytics on the data using SQL. 
+
+#The table
+CREATE TABLE BIT_DB.Spotifydata (
+    id               INTEGER        PRIMARY KEY,
+    artist_name      VARCHAR        NOT NULL,
+    track_name       VARCHAR        NOT NULL,
+    track_id         VARCHAR        NOT NULL,
+    popularity       INTEGER        NOT NULL,
+    danceability     DECIMAL (4, 3) NOT NULL,
+    energy           DECIMAL (4, 3) NOT NULL,
+    song_key         INTEGER        NOT NULL,
+    loudness         DECIMAL (5, 3) NOT NULL,
+    song_mode        INTEGER        NOT NULL,
+    speechiness      DECIMAL (5, 4) NOT NULL,
+    acousticness     DECIMAL (6, 5) NOT NULL,
+    instrumentalness DECIMAL (8, 7) NOT NULL,
+    liveness         DECIMAL (5, 4) NOT NULL,
+    valence          DECIMAL (4, 3) NOT NULL,
+    tempo            DECIMAL (6, 3) NOT NULL,
+    duration_ms      INTEGER        NOT NULL,
+    time_signature   INTEGER        NOT NULL
+);
+
+#Then, I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL. 
+
+--1. What is the average danceability by artist and track? 
+
+SELECT artist_name,
+       track_name,
+       AVG(danceability) 
+  FROM BIT_DB.Spotifydata
+ GROUP BY 1,
+          2
+ ORDER BY 3 DESC;
+ 
+-- 2. Who are the top 10 artists based on popularity?
+
+SELECT artist_name,
+       popularity
+  FROM BIT_DB.Spotifydata
+ GROUP BY 1
+ ORDER BY 2 DESC
+ LIMIT 10;
+ 
+-- 3. What artist released the longest song?
+
+SELECT artist_name,
+       track_name,
+       duration_ms
+  FROM BIT_DB.Spotifydata
+ WHERE duration_ms IN (
+           SELECT MAX(duration_ms) 
+             FROM BIT_DB.Spotifydata
+       );
+       
+-- 4. What's the average danceability for the 10 most popular songs?
+
+SELECT track_name,
+       AVG(danceability) 
+  FROM BIT_DB.Spotifydata
+ GROUP BY 1
+ ORDER BY Spotifydata.popularity DESC
+ LIMIT 10;
+ 
+--5. Which artist released the least energetic song?
+
+SELECT artist_name,
+       track_name,
+       energy
+  FROM BIT_DB.Spotifydata
+ WHERE energy IN (
+           SELECT MIN(energy) 
+             FROM BIT_DB.Spotifydata
+       );
+   
+--6. Which songs make up the Top 10 Loudest?
+
+SELECT track_name,
+       artist_name,
+       loudness
+  FROM BIT_DB.Spotifydata
+ GROUP BY 1,
+          2
+ ORDER BY 3 DESC
+ LIMIT 10;
+
+--7. What is the average liveness for the Top 10 Loudest tracks?
+
+SELECT track_name,
+       AVG(liveness) 
+  FROM BIT_DB.Spotifydata
+ GROUP BY 1
+ ORDER BY Spotifydata.loudness DESC
+ LIMIT 10;
