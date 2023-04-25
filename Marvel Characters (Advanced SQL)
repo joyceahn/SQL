@@ -1,4 +1,4 @@
-----In this SQL code, I'm querying a database that's holding data on Marvel characters to answer questions about the data.
+--In this SQL code, I'm querying a database that's holding data on Marvel characters to answer questions about the data.
 
 #The table
 CREATE TABLE marvels (ID INTEGER PRIMARY KEY,
